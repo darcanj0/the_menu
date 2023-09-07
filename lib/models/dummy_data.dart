@@ -26,7 +26,7 @@ const List<Category> categoriesMock = [
   Category(
     id: 'c5',
     title: 'Leve & Saudável',
-    color: Colors.amber,
+    color: Colors.greenAccent,
   ),
   Category(
     id: 'c6',
