@@ -1,6 +1,6 @@
 # the_menu
 
-A new Flutter project.
+A Flutter implementation of a restaurant menu app.
 
 ## Getting Started
 
