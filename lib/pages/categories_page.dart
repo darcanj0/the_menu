@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
 import 'package:the_menu/components/cards/category_card.dart';
 import 'package:the_menu/models/dummy_data.dart';
 
@@ -14,11 +15,7 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text("The Menu", style: textTheme.headlineLarge),
-          centerTitle: true,
-        ),
+        appBar: TheMenuAppBar(),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
           child: GridView.count(
