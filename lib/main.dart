@@ -12,32 +12,38 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final TextTheme originalTextTheme = Theme.of(context).textTheme;
+
+    final ColorScheme theMenuColorScheme =
+        ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 218, 12, 12))
+            .copyWith(
+      background: const Color.fromARGB(255, 240, 236, 200),
+    );
+
+    final TextTheme theMenuTextTheme =
+        GoogleFonts.vollkornTextTheme(originalTextTheme).copyWith(
+            headlineLarge: GoogleFonts.vollkorn(
+              textStyle: originalTextTheme.headlineLarge!.copyWith(
+                fontWeight: FontWeight.normal,
+                fontSize: 35,
+                color: theMenuColorScheme.onBackground,
+              ),
+            ),
+            headlineMedium: GoogleFonts.vollkorn(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: theMenuColorScheme.onInverseSurface,
+            ));
+
     final ThemeData theMenuTheme = ThemeData(
-      colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 218, 12, 12))
-          .copyWith(
-        background: const Color.fromARGB(255, 238, 235, 207),
-      ),
-      textTheme: GoogleFonts.notoSerifDisplayTextTheme(),
+      textTheme: theMenuTextTheme,
+      colorScheme: theMenuColorScheme,
       useMaterial3: true,
     );
 
     return MaterialApp(
       title: 'The Menu',
-      theme: theMenuTheme.copyWith(
-        textTheme: GoogleFonts.notoSerifTextTheme(
-          theMenuTheme.textTheme.copyWith(
-              headlineLarge:
-                  GoogleFonts.vollkornTextTheme().headlineLarge!.copyWith(
-                        color: theMenuTheme.colorScheme.onBackground,
-                        fontWeight: FontWeight.w500,
-                      ),
-              headlineMedium: TextStyle(
-                color: theMenuTheme.colorScheme.onInverseSurface,
-                fontWeight: FontWeight.bold,
-              )),
-        ),
-      ),
+      theme: theMenuTheme,
       home: const CategoriesPage(),
     );
   }

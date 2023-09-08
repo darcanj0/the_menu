@@ -13,9 +13,8 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
-        appBar: TheMenuAppBar(),
+        appBar: const TheMenuAppBar(),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
           child: GridView.count(

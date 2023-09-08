@@ -7,7 +7,7 @@ class TheMenuAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<StatefulWidget> createState() => _TheMenuAppBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(50);
+  Size get preferredSize => const Size.fromHeight(45);
 }
 
 class _TheMenuAppBarState extends State<TheMenuAppBar> {
@@ -16,7 +16,10 @@ class _TheMenuAppBarState extends State<TheMenuAppBar> {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title: Text("The Menu", style: textTheme.headlineLarge),
+      title: Text(
+        "The Menu",
+        style: textTheme.headlineLarge,
+      ),
       centerTitle: true,
     );
   }
