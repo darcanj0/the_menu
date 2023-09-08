@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the_menu/pages/categories_page.dart';
+import 'package:the_menu/pages/category_meals_page.dart';
+import 'package:the_menu/utils/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,6 +47,7 @@ class MyApp extends StatelessWidget {
       title: 'The Menu',
       theme: theMenuTheme,
       home: const CategoriesPage(),
+      routes: {AppRoutes.categoryMeals.name: (_) => const CategoryMealsPage()},
     );
   }
 }

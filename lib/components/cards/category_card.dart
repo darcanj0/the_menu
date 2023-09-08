@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:the_menu/pages/category_meals_page.dart';
+import 'package:the_menu/utils/routes.dart';
 
 import '../../models/category.dart';
 
@@ -28,9 +28,8 @@ class _CategoryCardState extends State<CategoryCard> {
   }
 
   void _selectCategory(BuildContext ctx) {
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => const CategoryMealsPage()),
-    );
+    Navigator.of(context)
+        .pushNamed(AppRoutes.categoryMeals.name, arguments: widget.category);
   }
 
   static const BorderRadius cardBorderRadius =
