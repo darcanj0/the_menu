@@ -37,7 +37,7 @@ class _CategoryCardState extends State<CategoryCard> {
                 fit: BoxFit.cover,
                 opacity: .4,
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
               gradient: LinearGradient(
                 colors: [
                   widget.category.color.withOpacity(0.5),
