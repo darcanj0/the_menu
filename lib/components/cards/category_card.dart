@@ -26,25 +26,33 @@ class _CategoryCardState extends State<CategoryCard> {
     super.didChangeDependencies();
   }
 
+  static const BorderRadius cardBorderRadius =
+      BorderRadius.all(Radius.circular(10));
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.all(4),
       child: InkWell(
+        borderRadius: cardBorderRadius,
         onTap: () {},
         child: Container(
             decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                borderRadius: cardBorderRadius,
                 border: Border.all(
                   color: Colors.black26,
                   width: 1,
                 )),
-            child: Ink.image(
-              image: image,
-              fit: BoxFit.cover,
+            child: Ink(
+              decoration: BoxDecoration(
+                  borderRadius: cardBorderRadius,
+                  image: DecorationImage(image: image, fit: BoxFit.cover)),
               child: Ink(
-                color: widget.category.color.withOpacity(0.3),
+                decoration: BoxDecoration(
+                  color: widget.category.color.withOpacity(0.3),
+                  borderRadius: cardBorderRadius,
+                ),
                 child: Center(
                   child: Text(
                     widget.category.title,
