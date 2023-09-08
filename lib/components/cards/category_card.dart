@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:the_menu/pages/category_meals_page.dart';
 
 import '../../models/category.dart';
 
@@ -26,6 +27,12 @@ class _CategoryCardState extends State<CategoryCard> {
     super.didChangeDependencies();
   }
 
+  void _selectCategory(BuildContext ctx) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const CategoryMealsPage()),
+    );
+  }
+
   static const BorderRadius cardBorderRadius =
       BorderRadius.all(Radius.circular(10));
 
@@ -36,7 +43,7 @@ class _CategoryCardState extends State<CategoryCard> {
       padding: const EdgeInsets.all(4),
       child: InkWell(
         borderRadius: cardBorderRadius,
-        onTap: () {},
+        onTap: () => _selectCategory(context),
         child: Container(
             decoration: BoxDecoration(
                 borderRadius: cardBorderRadius,

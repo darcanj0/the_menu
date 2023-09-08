@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
         GoogleFonts.vollkornTextTheme(originalTextTheme).copyWith(
             headlineLarge: GoogleFonts.vollkorn(
               textStyle: originalTextTheme.headlineLarge!.copyWith(
-                fontWeight: FontWeight.normal,
-                fontSize: 35,
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
                 color: theMenuColorScheme.onBackground,
               ),
             ),

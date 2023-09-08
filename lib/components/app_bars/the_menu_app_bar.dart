@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TheMenuAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const TheMenuAppBar({super.key});
+  final String title;
+  const TheMenuAppBar({required this.title, super.key});
 
   @override
   State<StatefulWidget> createState() => _TheMenuAppBarState();
@@ -17,7 +18,7 @@ class _TheMenuAppBarState extends State<TheMenuAppBar> {
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       title: Text(
-        "The Menu",
+        widget.title,
         style: textTheme.headlineLarge,
       ),
       centerTitle: true,

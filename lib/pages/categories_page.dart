@@ -14,7 +14,9 @@ class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const TheMenuAppBar(),
+        appBar: const TheMenuAppBar(
+          title: 'The Menu',
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
           child: GridView.count(

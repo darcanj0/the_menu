@@ -7,7 +7,7 @@ class CategoryMealsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: TheMenuAppBar(),
+      appBar: TheMenuAppBar(title: 'Meals'),
       body: Center(
         child: Text('Meals'),
       ),
