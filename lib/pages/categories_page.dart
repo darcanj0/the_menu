@@ -19,8 +19,8 @@ class CategoriesPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
           child: GridView.count(
             crossAxisCount: 2,
-            scrollDirection: Axis.vertical,
-            childAspectRatio: 1 / 2,
+            scrollDirection: Axis.horizontal,
+            childAspectRatio: 1 / .75,
             children: _categoriesCards,
           ),
         ));

@@ -31,32 +31,44 @@ class _CategoryCardState extends State<CategoryCard> {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.all(4),
-      child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                image: image,
-                fit: BoxFit.cover,
-                opacity: 0.35,
+      child: InkWell(
+        onTap: () {},
+        child: Container(
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
+                border: Border.all(
+                  color: Colors.black26,
+                  width: 1,
+                )),
+            child: Ink.image(
+              image: image,
+              fit: BoxFit.cover,
+              child: Ink(
+                color: widget.category.color.withOpacity(0.3),
+                child: Center(
+                  child: Text(
+                    widget.category.title,
+                    style: textTheme.headlineMedium,
+                  ),
+                ),
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              gradient: LinearGradient(
-                colors: [
-                  widget.category.color.withOpacity(0.9),
-                  widget.category.color
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              border: Border.all(
-                color: Colors.black26,
-                width: 1,
-              )),
-          child: Center(
-            child: Text(
-              widget.category.title,
-              style: textTheme.headlineMedium,
-            ),
-          )),
+            )),
+      ),
     );
   }
 }
+
+  // image: DecorationImage(
+  //   image: image,
+  //   fit: BoxFit.cover,
+  //   opacity: 0.35,
+  // )
+
+  //   gradient: LinearGradient(
+  //   colors: [
+  //     widget.category.color.withOpacity(0.9),
+  //     widget.category.color
+  //   ],
+  //   begin: Alignment.topLeft,
+  //   end: Alignment.bottomRight,
+  // ),
