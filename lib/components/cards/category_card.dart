@@ -28,6 +28,7 @@ class _CategoryCardState extends State<CategoryCard> {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.all(4),
       child: Container(
@@ -35,12 +36,12 @@ class _CategoryCardState extends State<CategoryCard> {
               image: DecorationImage(
                 image: image,
                 fit: BoxFit.cover,
-                opacity: .4,
+                opacity: 0.35,
               ),
               borderRadius: const BorderRadius.all(Radius.circular(8)),
               gradient: LinearGradient(
                 colors: [
-                  widget.category.color.withOpacity(0.5),
+                  widget.category.color.withOpacity(0.9),
                   widget.category.color
                 ],
                 begin: Alignment.topLeft,
@@ -53,11 +54,7 @@ class _CategoryCardState extends State<CategoryCard> {
           child: Center(
             child: Text(
               widget.category.title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
+              style: textTheme.headlineMedium,
             ),
           )),
     );

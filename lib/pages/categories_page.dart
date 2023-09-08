@@ -12,10 +12,11 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text("The Menu"),
+          title: Text("The Menu", style: textTheme.headlineLarge),
           centerTitle: true,
         ),
         body: Padding(
