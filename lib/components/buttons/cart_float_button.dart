@@ -9,13 +9,19 @@ class CartFloatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     void goToCart(BuildContext ctx) {
       Navigator.of(context).pushNamed(AppRoutes.cart.name);
     }
 
     return FloatingActionButton(
+      backgroundColor: colorScheme.onPrimaryContainer,
       onPressed: () => goToCart(context),
-      child: const Icon(Icons.shopping_cart),
+      child: Icon(
+        Icons.shopping_cart,
+        color: colorScheme.onInverseSurface,
+      ),
     );
   }
 }
