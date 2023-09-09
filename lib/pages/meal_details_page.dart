@@ -276,29 +276,27 @@ class BadgeListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 3,
-          child: Container(
-            height: itemHeight,
-            decoration: BoxDecoration(
-                border: Border.all(color: colorScheme.outline, width: 1)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Icon(icon), Text(label)],
-            ),
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+          border: Border.all(color: colorScheme.outline, width: 1)),
+      child: ListTile(
+        leading: SizedBox(
+          width: 100,
+          height: itemHeight,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Icon(icon), Text(label)],
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: Container(
-              height: itemHeight,
-              decoration: BoxDecoration(
-                  border: Border.all(color: colorScheme.outline, width: 1)),
-              child: Center(child: Text(data))),
-        )
-      ],
+        trailing: SizedBox(
+          height: itemHeight,
+          width: 100,
+          child: Center(
+            child: Text(data),
+          ),
+        ),
+      ),
     );
   }
 }
