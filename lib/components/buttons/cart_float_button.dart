@@ -9,12 +9,12 @@ class CartFloatButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _goToCart(BuildContext ctx) {
+    void goToCart(BuildContext ctx) {
       Navigator.of(context).pushNamed(AppRoutes.cart.name);
     }
 
     return FloatingActionButton(
-      onPressed: () => _goToCart(context),
+      onPressed: () => goToCart(context),
       child: const Icon(Icons.shopping_cart),
     );
   }
