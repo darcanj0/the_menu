@@ -25,23 +25,31 @@ class MyApp extends StatelessWidget {
 
     final TextTheme theMenuTextTheme =
         GoogleFonts.vollkornTextTheme(originalTextTheme).copyWith(
-      headlineLarge: GoogleFonts.vollkorn(
-        textStyle: originalTextTheme.headlineLarge!.copyWith(
-          fontWeight: FontWeight.bold,
-          fontSize: 25,
-          color: theMenuColorScheme.onBackground,
-        ),
-      ),
-      headlineMedium: GoogleFonts.vollkorn(
-        fontWeight: FontWeight.bold,
-        fontSize: 25,
-        color: theMenuColorScheme.onInverseSurface,
-      ),
-      titleLarge: GoogleFonts.vollkorn(
-        fontWeight: FontWeight.bold,
-        color: theMenuColorScheme.onPrimaryContainer,
-      ),
-    );
+            headlineLarge: GoogleFonts.vollkorn(
+              textStyle: originalTextTheme.headlineLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: theMenuColorScheme.onBackground,
+              ),
+            ),
+            headlineMedium: GoogleFonts.vollkorn(
+              fontWeight: FontWeight.bold,
+              fontSize: 35,
+              color: theMenuColorScheme.onInverseSurface,
+            ),
+            titleLarge: GoogleFonts.vollkorn(
+              fontWeight: FontWeight.bold,
+              color: theMenuColorScheme.onInverseSurface,
+            ),
+            titleMedium: GoogleFonts.vollkorn(
+              fontWeight: FontWeight.bold,
+              color: theMenuColorScheme.onPrimaryContainer,
+              fontSize: 20,
+            ),
+            labelSmall: GoogleFonts.vollkorn(
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+            ));
 
     final ThemeData theMenuTheme = ThemeData(
       textTheme: theMenuTextTheme,

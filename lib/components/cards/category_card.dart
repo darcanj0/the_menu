@@ -62,6 +62,8 @@ class _CategoryCardState extends State<CategoryCard> {
                 child: Center(
                   child: Text(
                     widget.category.title,
+                    softWrap: true,
+                    overflow: TextOverflow.fade,
                     style: textTheme.headlineMedium,
                   ),
                 ),
