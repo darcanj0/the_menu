@@ -75,10 +75,13 @@ class MealImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: borderRadius,
         child: Stack(children: [
-          Image(
-            width: double.infinity,
-            image: AssetImage(meal.imagePath),
-            fit: BoxFit.fitWidth,
+          Ink(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fitWidth,
+                image: AssetImage(meal.imagePath),
+              ),
+            ),
           ),
           Positioned(
             bottom: 15,
