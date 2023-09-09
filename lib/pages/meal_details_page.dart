@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
+import 'package:the_menu/models/cart.dart';
 
 import '../models/meal.dart';
 
@@ -11,6 +12,24 @@ class MealDetailsPage extends StatefulWidget {
 }
 
 class _MealDetailsPageState extends State<MealDetailsPage> {
+  late int ammount = 1;
+
+  void addOne() {
+    setState(() {
+      ammount += 1;
+    });
+  }
+
+  void removeOne() {
+    if (ammount > 1) {
+      setState(() {
+        ammount -= 1;
+      });
+    }
+  }
+
+  String getYesNo(bool prop) => prop ? 'Yes' : 'No';
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -19,7 +38,10 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
 
     final Meal meal = ModalRoute.of(context)!.settings.arguments as Meal;
 
-    String getYesNo(bool prop) => prop ? 'Yes' : 'No';
+    void addToCart() {
+      final CartItem item = CartItem(meal: meal, ammount: ammount);
+      print('Added to cart ${item.meal.name}');
+    }
 
     List<Widget> getMealBadges = [
       BadgeListItem(
@@ -80,7 +102,72 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
       ),
       bottomNavigationBar: Container(
         height: 75,
-        color: Colors.green,
+        color: colorScheme.secondaryContainer,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: Container(
+                    height: 40,
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: Colors.black,
+                        )),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: removeOne,
+                          icon: const Icon(Icons.remove),
+                        ),
+                        Text(
+                          ammount.toString(),
+                          style: textTheme.labelLarge,
+                        ),
+                        IconButton(
+                          onPressed: addOne,
+                          icon: const Icon(Icons.add),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Flexible(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  child: MaterialButton(
+                    onPressed: () => addToCart(),
+                    color: colorScheme.primary,
+                    textColor: colorScheme.onPrimary,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Add',
+                          style: textTheme.labelMedium,
+                        ),
+                        if (ammount > 0)
+                          Text(
+                              'U\$  ${(meal.price * ammount).toStringAsFixed(2)}')
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

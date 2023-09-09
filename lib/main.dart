@@ -19,38 +19,49 @@ class MyApp extends StatelessWidget {
     final TextTheme originalTextTheme = Theme.of(context).textTheme;
 
     final ColorScheme theMenuColorScheme =
-        ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 218, 12, 12))
+        ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 247, 76, 76))
             .copyWith(
       background: const Color.fromARGB(255, 240, 236, 200),
     );
 
     final TextTheme theMenuTextTheme =
         GoogleFonts.vollkornTextTheme(originalTextTheme).copyWith(
-            headlineLarge: GoogleFonts.vollkorn(
-              textStyle: originalTextTheme.headlineLarge!.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: theMenuColorScheme.onBackground,
-              ),
-            ),
-            headlineMedium: GoogleFonts.vollkorn(
-              fontWeight: FontWeight.bold,
-              fontSize: 35,
-              color: theMenuColorScheme.onInverseSurface,
-            ),
-            titleLarge: GoogleFonts.vollkorn(
-              fontWeight: FontWeight.bold,
-              color: theMenuColorScheme.onInverseSurface,
-            ),
-            titleMedium: GoogleFonts.vollkorn(
-              fontWeight: FontWeight.bold,
-              color: theMenuColorScheme.onPrimaryContainer,
-              fontSize: 20,
-            ),
-            labelSmall: GoogleFonts.vollkorn(
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ));
+      headlineLarge: GoogleFonts.vollkorn(
+        textStyle: originalTextTheme.headlineLarge!.copyWith(
+          fontWeight: FontWeight.bold,
+          fontSize: 25,
+          color: theMenuColorScheme.onBackground,
+        ),
+      ),
+      headlineMedium: GoogleFonts.vollkorn(
+        fontWeight: FontWeight.bold,
+        fontSize: 35,
+        color: theMenuColorScheme.onInverseSurface,
+      ),
+      titleLarge: GoogleFonts.vollkorn(
+        fontWeight: FontWeight.bold,
+        color: theMenuColorScheme.onInverseSurface,
+      ),
+      titleMedium: GoogleFonts.vollkorn(
+        fontWeight: FontWeight.bold,
+        color: theMenuColorScheme.onPrimaryContainer,
+        fontSize: 20,
+      ),
+      labelSmall: GoogleFonts.vollkorn(
+        fontWeight: FontWeight.bold,
+        fontSize: 13,
+      ),
+      labelLarge: GoogleFonts.vollkorn(
+        fontWeight: FontWeight.bold,
+        fontSize: 15,
+        color: theMenuColorScheme.onBackground,
+      ),
+      labelMedium: GoogleFonts.vollkorn(
+        fontWeight: FontWeight.bold,
+        fontSize: 15,
+        color: theMenuColorScheme.onPrimary,
+      ),
+    );
 
     final ThemeData theMenuTheme = ThemeData(
       textTheme: theMenuTextTheme,
