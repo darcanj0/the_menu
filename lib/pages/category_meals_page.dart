@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
+import 'package:the_menu/components/buttons/cart_float_button.dart';
 import 'package:the_menu/models/category.dart';
 
 class CategoryMealsPage extends StatelessWidget {
@@ -14,6 +15,7 @@ class CategoryMealsPage extends StatelessWidget {
       body: const Center(
         child: Text('Meals'),
       ),
+      floatingActionButton: const CartFloatButton(),
     );
   }
 }

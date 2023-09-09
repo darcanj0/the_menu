@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
+import 'package:the_menu/components/buttons/cart_float_button.dart';
 import 'package:the_menu/components/cards/category_card.dart';
 import 'package:the_menu/models/dummy_data.dart';
 
@@ -14,17 +15,19 @@ class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const TheMenuAppBar(
-          title: 'The Menu',
+      appBar: const TheMenuAppBar(
+        title: 'The Menu',
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+        child: GridView.count(
+          crossAxisCount: 2,
+          scrollDirection: Axis.horizontal,
+          childAspectRatio: 1 / .75,
+          children: _categoriesCards,
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-          child: GridView.count(
-            crossAxisCount: 2,
-            scrollDirection: Axis.horizontal,
-            childAspectRatio: 1 / .75,
-            children: _categoriesCards,
-          ),
-        ));
+      ),
+      floatingActionButton: const CartFloatButton(),
+    );
   }
 }
