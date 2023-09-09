@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:the_menu/pages/cart_page.dart';
 import 'package:the_menu/pages/categories_page.dart';
 import 'package:the_menu/pages/category_meals_page.dart';
+import 'package:the_menu/pages/meal_details_page.dart';
 import 'package:the_menu/utils/routes.dart';
 
 void main() {
@@ -63,7 +64,8 @@ class MyApp extends StatelessWidget {
       home: const CategoriesPage(),
       routes: {
         AppRoutes.categoryMeals.name: (_) => const CategoryMealsPage(),
-        AppRoutes.cart.name: (_) => const CartPage()
+        AppRoutes.cart.name: (_) => const CartPage(),
+        AppRoutes.mealDetails.name : (_) => const MealDetailsPage()
       },
     );
   }

@@ -17,9 +17,11 @@ class _TheMenuAppBarState extends State<TheMenuAppBar> {
     final TextTheme textTheme = Theme.of(context).textTheme;
     return AppBar(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title: Text(
-        widget.title,
-        style: textTheme.headlineLarge,
+      title: FittedBox(
+        child: Text(
+          widget.title,
+          style: textTheme.headlineLarge,
+        ),
       ),
       centerTitle: true,
     );
