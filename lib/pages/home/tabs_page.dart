@@ -21,9 +21,9 @@ class _TabsPageState extends State<TabsPage> {
     });
   }
 
-  final List<Widget> _tabs = [
-    const CategoriesTab(),
-    const FavoritesTab(),
+  final List<Map<String, Object>> _tabs = [
+    {'tab': const CategoriesTab(), 'appBarTitle': 'Categories'},
+    {'tab': const FavoritesTab(), 'appBarTitle': 'Favorites'},
   ];
 
   @override
@@ -32,12 +32,15 @@ class _TabsPageState extends State<TabsPage> {
     final ColorScheme colorScheme = theme.colorScheme;
 
     return Scaffold(
-        appBar: const TheMenuAppBar(title: 'The Menu'),
-        body: _tabs[_selectedIndex],
+        appBar: TheMenuAppBar(
+            title: _tabs[_selectedIndex]['appBarTitle'] as String),
+        body: _tabs[_selectedIndex]['tab'] as Widget,
         bottomNavigationBar: BottomNavigationBar(
             backgroundColor: colorScheme.inversePrimary,
             onTap: _selectPage,
             currentIndex: _selectedIndex,
+            selectedFontSize: 15,
+            unselectedFontSize: 13,
             items: const [
               BottomNavigationBarItem(
                 label: 'Home',
