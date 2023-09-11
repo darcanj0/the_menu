@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:the_menu/pages/all_meals_page.dart';
 import 'package:the_menu/pages/cart_page.dart';
 import 'package:the_menu/pages/home/categories_tab.dart';
 import 'package:the_menu/pages/category_meals_page.dart';
 import 'package:the_menu/pages/meal_details_page.dart';
 import 'package:the_menu/pages/home/tabs_page.dart';
+import 'package:the_menu/pages/settings_page.dart';
 import 'package:the_menu/utils/routes.dart';
 
 void main() {
@@ -20,10 +22,7 @@ class MyApp extends StatelessWidget {
     final TextTheme originalTextTheme = Theme.of(context).textTheme;
 
     final ColorScheme theMenuColorScheme =
-        ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 247, 76, 76))
-            .copyWith(
-      background: const Color.fromARGB(255, 240, 236, 200),
-    );
+        ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 247, 76, 76));
 
     final TextTheme theMenuTextTheme =
         GoogleFonts.vollkornTextTheme(originalTextTheme).copyWith(
@@ -75,9 +74,12 @@ class MyApp extends StatelessWidget {
       theme: theMenuTheme,
       home: const TabsPage(),
       routes: {
+        AppRoutes.categories.name: (_) => const TabsPage(),
         AppRoutes.categoryMeals.name: (_) => const CategoryMealsPage(),
         AppRoutes.cart.name: (_) => const CartPage(),
-        AppRoutes.mealDetails.name: (_) => const MealDetailsPage()
+        AppRoutes.mealDetails.name: (_) => const MealDetailsPage(),
+        AppRoutes.allMeals.name: (_) => const AllMealsPage(),
+        AppRoutes.settings.name: (_) => const SettingsPage()
       },
       onUnknownRoute: (settings) =>
           MaterialPageRoute(builder: (_) => const CategoriesTab()),

@@ -1,1 +1,8 @@
-enum AppRoutes { categoryMeals, categories, cart, mealDetails }
+enum AppRoutes {
+  allMeals,
+  categories,
+  categoryMeals,
+  mealDetails,
+  cart,
+  settings
+}

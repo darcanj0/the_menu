@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
+import 'package:the_menu/components/app_bars/the_menu_drawer.dart';
 import 'package:the_menu/pages/home/categories_tab.dart';
 import 'package:the_menu/pages/home/favorites_tab.dart';
 
@@ -34,6 +35,7 @@ class _TabsPageState extends State<TabsPage> {
     return Scaffold(
         appBar: TheMenuAppBar(
             title: _tabs[_selectedIndex]['appBarTitle'] as String),
+        drawer: const TheMenuDrawer(),
         body: _tabs[_selectedIndex]['tab'] as Widget,
         bottomNavigationBar: BottomNavigationBar(
             backgroundColor: colorScheme.inversePrimary,
