@@ -13,7 +13,7 @@ class TheMenuDrawer extends StatelessWidget {
     void navigateTo(AppRoutes route) =>
         Navigator.of(context).pushNamed(route.name);
 
-    void navigateToPoppoingCurrent(AppRoutes route) =>
+    void navigateToPoppingCurrent(AppRoutes route) =>
         Navigator.of(context).pushReplacementNamed(route.name);
 
     Widget getTile(IconData icon, String label, void Function() fn) {
@@ -45,7 +45,7 @@ class TheMenuDrawer extends StatelessWidget {
           height: 20,
         ),
         getTile(Icons.home, 'Home',
-            () => navigateToPoppoingCurrent(AppRoutes.categories)),
+            () => navigateToPoppingCurrent(AppRoutes.categories)),
         getTile(Icons.restaurant, 'All Meals',
             () => navigateTo(AppRoutes.allMeals)),
         getTile(Icons.shopping_cart, 'Cart', () => navigateTo(AppRoutes.cart)),

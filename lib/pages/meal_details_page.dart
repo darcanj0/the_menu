@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
+import 'package:the_menu/components/buttons/favorite_float_button.dart';
 import 'package:the_menu/models/cart.dart';
 
 import '../models/meal.dart';
@@ -100,6 +101,7 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
           ),
         ),
       ),
+      floatingActionButton: const FavoriteFloatButton(),
       bottomNavigationBar: Container(
         height: 75,
         color: colorScheme.secondaryContainer,
