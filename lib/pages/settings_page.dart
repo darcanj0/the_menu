@@ -46,14 +46,14 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: const TheMenuAppBar(title: 'Settings'),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: SettingsPage.sectionPaddingInPx,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                     horizontal: SettingsPage.sectionPaddingInPx),
                 child: Text(
                   'Filters',

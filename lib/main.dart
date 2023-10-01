@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:the_menu/models/cart.dart';
 import 'package:the_menu/models/dummy_data.dart';
 import 'package:the_menu/models/meal.dart';
 import 'package:the_menu/models/settings.dart';
@@ -59,6 +60,18 @@ class _MyAppState extends State<MyApp> {
   }
 
   bool isFavorite(Meal meal) => favoriteMeals.contains(meal);
+
+  //cart
+  Cart cart = Cart(items: []);
+
+  void addToCart(CartItem item) => setState(() => cart.addItem(item));
+
+  void removeFromCart(CartItem item) => setState(() {
+        cart.removeItem(item);
+      });
+
+  void changeItemAmmount(CartItem item, int newAmmount) =>
+      setState(() => cart.changeAmmount(item, newAmmount));
 
   @override
   Widget build(BuildContext context) {
@@ -123,10 +136,15 @@ class _MyAppState extends State<MyApp> {
             TabsPage(favoriteMeals: favoriteMeals),
         AppRoutes.categoryMeals.name: (_) =>
             CategoryMealsPage(filteredMeals: filteredMeals),
-        AppRoutes.cart.name: (_) => const CartPage(),
+        AppRoutes.cart.name: (_) => CartPage(
+              cart: cart,
+              onRemove: removeFromCart,
+              onChangeAmmount: changeItemAmmount,
+            ),
         AppRoutes.mealDetails.name: (_) => MealDetailsPage(
               onToggleFavorite: toggleFavoriteMeal,
               isFavorite: isFavorite,
+              onAddToCart: addToCart,
             ),
         AppRoutes.allMeals.name: (_) =>
             AllMealsPage(filteredMeals: filteredMeals),

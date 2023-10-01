@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
 import 'package:the_menu/models/cart.dart';
+import 'package:the_menu/utils/routes.dart';
 
 import '../models/meal.dart';
 
 class MealDetailsPage extends StatefulWidget {
   const MealDetailsPage(
-      {required this.onToggleFavorite, required this.isFavorite, super.key});
+      {required this.onToggleFavorite,
+      required this.isFavorite,
+      required this.onAddToCart,
+      super.key});
 
   final void Function(Meal) onToggleFavorite;
 
   final bool Function(Meal) isFavorite;
+
+  final void Function(CartItem) onAddToCart;
 
   @override
   State<MealDetailsPage> createState() => _MealDetailsPageState();
@@ -45,7 +51,8 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
 
     void addToCart() {
       final CartItem item = CartItem(meal: meal, ammount: ammount);
-      print('Added to cart ${item.meal.name}');
+      widget.onAddToCart(item);
+      Navigator.of(context).pushNamed(AppRoutes.cart.name);
     }
 
     List<Widget> getMealBadges = [

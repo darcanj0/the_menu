@@ -3,7 +3,7 @@ import 'package:the_menu/models/meal.dart';
 class Cart {
   final List<CartItem> items;
 
-  const Cart({required this.items});
+  Cart({required this.items});
 
   double get total => items
       .map((item) => item.total)
@@ -25,6 +25,13 @@ class Cart {
 
   void removeItem(CartItem item) {
     items.removeWhere((element) => element.meal.id == item.meal.id);
+  }
+
+  void changeAmmount(CartItem item, int newAmmount) {
+    if (newAmmount <= 0) return removeItem(item);
+    items
+        .where((element) => item.meal.id == element.meal.id)
+        .forEach((element) => element.changeAmmount = newAmmount);
   }
 }
 
