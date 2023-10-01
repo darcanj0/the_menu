@@ -51,10 +51,14 @@ class _MyAppState extends State<MyApp> {
   List<Meal> favoriteMeals = [];
 
   void toggleFavoriteMeal(Meal meal) {
-    favoriteMeals.contains(meal)
-        ? favoriteMeals.remove(meal)
-        : favoriteMeals.add(meal);
+    setState(() {
+      favoriteMeals.contains(meal)
+          ? favoriteMeals.remove(meal)
+          : favoriteMeals.add(meal);
+    });
   }
+
+  bool isFavorite(Meal meal) => favoriteMeals.contains(meal);
 
   @override
   Widget build(BuildContext context) {
@@ -120,8 +124,10 @@ class _MyAppState extends State<MyApp> {
         AppRoutes.categoryMeals.name: (_) =>
             CategoryMealsPage(filteredMeals: filteredMeals),
         AppRoutes.cart.name: (_) => const CartPage(),
-        AppRoutes.mealDetails.name: (_) =>
-            MealDetailsPage(onToggleFavorite: toggleFavoriteMeal),
+        AppRoutes.mealDetails.name: (_) => MealDetailsPage(
+              onToggleFavorite: toggleFavoriteMeal,
+              isFavorite: isFavorite,
+            ),
         AppRoutes.allMeals.name: (_) =>
             AllMealsPage(filteredMeals: filteredMeals),
         AppRoutes.settings.name: (_) => SettingsPage(

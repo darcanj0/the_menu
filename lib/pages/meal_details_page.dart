@@ -5,9 +5,12 @@ import 'package:the_menu/models/cart.dart';
 import '../models/meal.dart';
 
 class MealDetailsPage extends StatefulWidget {
-  const MealDetailsPage({required this.onToggleFavorite, super.key});
+  const MealDetailsPage(
+      {required this.onToggleFavorite, required this.isFavorite, super.key});
 
   final void Function(Meal) onToggleFavorite;
+
+  final bool Function(Meal) isFavorite;
 
   @override
   State<MealDetailsPage> createState() => _MealDetailsPageState();
@@ -106,7 +109,7 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
         backgroundColor: colorScheme.onPrimaryContainer,
         onPressed: () => widget.onToggleFavorite(meal),
         child: Icon(
-          Icons.star_outline_outlined,
+          widget.isFavorite(meal) ? Icons.star : Icons.star_outline_outlined,
           color: colorScheme.onInverseSurface,
         ),
       ),
