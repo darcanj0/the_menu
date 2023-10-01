@@ -3,22 +3,20 @@ import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
 import 'package:the_menu/models/settings.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  const SettingsPage(
+      {required this.onSettingsChanged, required this.settings, super.key});
 
-  static double sectionPaddingInPx = 20;
+  static const double sectionPaddingInPx = 20;
+
+  final void Function(Settings) onSettingsChanged;
+
+  final Settings settings;
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  Settings settings = Settings(
-    isGlutenFree: false,
-    isLactoseFree: false,
-    isVegan: false,
-    isVeggie: false,
-  );
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -37,7 +35,10 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         subtitle: Text(subtitle),
         value: value,
-        onChanged: onChanged,
+        onChanged: (value) {
+          onChanged(value);
+          widget.onSettingsChanged(widget.settings);
+        },
       );
     }
 
@@ -67,38 +68,38 @@ class _SettingsPageState extends State<SettingsPage> {
               createSwitch(
                 title: 'Gluten Free',
                 subtitle: 'Only display Gluten Free meals',
-                value: settings.isGlutenFree,
+                value: widget.settings.isGlutenFree,
                 onChanged: (value) {
                   setState(() {
-                    settings.isGlutenFree = value;
+                    widget.settings.isGlutenFree = value;
                   });
                 },
               ),
               createSwitch(
                   title: 'Lactose Free',
                   subtitle: 'Only display Lactose Free meals',
-                  value: settings.isLactoseFree,
+                  value: widget.settings.isDairyFree,
                   onChanged: (value) {
                     setState(() {
-                      settings.isLactoseFree = value;
+                      widget.settings.isDairyFree = value;
                     });
                   }),
               createSwitch(
                   title: 'Vegan',
                   subtitle: 'Only display vegan meals',
-                  value: settings.isVegan,
+                  value: widget.settings.isVegan,
                   onChanged: (value) {
                     setState(() {
-                      settings.isVegan = value;
+                      widget.settings.isVegan = value;
                     });
                   }),
               createSwitch(
                 title: 'Vegetarian',
                 subtitle: 'Only display veggie meals',
-                value: settings.isVeggie,
+                value: widget.settings.isVeggie,
                 onChanged: (value) {
                   setState(() {
-                    settings.isVeggie = value;
+                    widget.settings.isVeggie = value;
                   });
                 },
               )

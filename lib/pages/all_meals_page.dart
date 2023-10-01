@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
+import 'package:the_menu/models/meal.dart';
 
 import '../components/cards/meal_card.dart';
-import '../models/dummy_data.dart';
 
 class AllMealsPage extends StatelessWidget {
-  const AllMealsPage({super.key});
+  const AllMealsPage({required this.filteredMeals, super.key});
 
-  static const categoryMeals = mockMeals;
+  final List<Meal> filteredMeals;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,9 @@ class AllMealsPage extends StatelessWidget {
           builder: (context, constraints) => SizedBox(
             width: constraints.maxWidth,
             child: ListView.builder(
-                itemCount: categoryMeals.length,
+                itemCount: filteredMeals.length,
                 itemBuilder: (ctx, index) =>
-                    MealCard(meal: categoryMeals[index])),
+                    MealCard(meal: filteredMeals[index])),
           ),
         ),
       ),

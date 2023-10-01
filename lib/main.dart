@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:the_menu/models/dummy_data.dart';
+import 'package:the_menu/models/meal.dart';
+import 'package:the_menu/models/settings.dart';
 import 'package:the_menu/pages/all_meals_page.dart';
 import 'package:the_menu/pages/cart_page.dart';
 import 'package:the_menu/pages/home/categories_tab.dart';
@@ -13,8 +16,35 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  static const List<Meal> allMeals = mockMeals;
+
+  List<Meal> avaliableMeals = [];
+
+  Settings settings = Settings(
+      isGlutenFree: false, isDairyFree: false, isVegan: false, isVeggie: false);
+
+  void onSettingsChanged(Settings newSettings) {
+    setState(() {
+      settings = newSettings;
+      avaliableMeals = filteredMeals;
+    });
+  }
+
+  List<Meal> get filteredMeals => allMeals.where((element) {
+        final filterVegan = settings.isVegan && !element.isVegan;
+        final filterVeggie = settings.isVeggie && !element.isVeggie;
+        final filterDairy = settings.isDairyFree && !element.isDairyFree;
+        final filterGluten = settings.isGlutenFree && !element.isGlutenFree;
+        return !filterGluten && !filterDairy && !filterVegan && !filterVeggie;
+      }).toList();
 
   // This widget is the root of your application.
   @override
@@ -75,11 +105,16 @@ class MyApp extends StatelessWidget {
       home: const TabsPage(),
       routes: {
         AppRoutes.categories.name: (_) => const TabsPage(),
-        AppRoutes.categoryMeals.name: (_) => const CategoryMealsPage(),
+        AppRoutes.categoryMeals.name: (_) =>
+            CategoryMealsPage(filteredMeals: filteredMeals),
         AppRoutes.cart.name: (_) => const CartPage(),
         AppRoutes.mealDetails.name: (_) => const MealDetailsPage(),
-        AppRoutes.allMeals.name: (_) => const AllMealsPage(),
-        AppRoutes.settings.name: (_) => const SettingsPage()
+        AppRoutes.allMeals.name: (_) =>
+            AllMealsPage(filteredMeals: filteredMeals),
+        AppRoutes.settings.name: (_) => SettingsPage(
+              settings: settings,
+              onSettingsChanged: onSettingsChanged,
+            )
       },
       onUnknownRoute: (settings) =>
           MaterialPageRoute(builder: (_) => const CategoriesTab()),
