@@ -24,6 +24,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  //filters
   static const List<Meal> allMeals = mockMeals;
 
   List<Meal> avaliableMeals = [];
@@ -46,7 +47,15 @@ class _MyAppState extends State<MyApp> {
         return !filterGluten && !filterDairy && !filterVegan && !filterVeggie;
       }).toList();
 
-  // This widget is the root of your application.
+  //favorites
+  List<Meal> favoriteMeals = [];
+
+  void toggleFavoriteMeal(Meal meal) {
+    favoriteMeals.contains(meal)
+        ? favoriteMeals.remove(meal)
+        : favoriteMeals.add(meal);
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextTheme originalTextTheme = Theme.of(context).textTheme;
@@ -102,13 +111,17 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'The Menu',
       theme: theMenuTheme,
-      home: const TabsPage(),
+      home: TabsPage(
+        favoriteMeals: favoriteMeals,
+      ),
       routes: {
-        AppRoutes.categories.name: (_) => const TabsPage(),
+        AppRoutes.categories.name: (_) =>
+            TabsPage(favoriteMeals: favoriteMeals),
         AppRoutes.categoryMeals.name: (_) =>
             CategoryMealsPage(filteredMeals: filteredMeals),
         AppRoutes.cart.name: (_) => const CartPage(),
-        AppRoutes.mealDetails.name: (_) => const MealDetailsPage(),
+        AppRoutes.mealDetails.name: (_) =>
+            MealDetailsPage(onToggleFavorite: toggleFavoriteMeal),
         AppRoutes.allMeals.name: (_) =>
             AllMealsPage(filteredMeals: filteredMeals),
         AppRoutes.settings.name: (_) => SettingsPage(

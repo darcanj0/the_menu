@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
-import 'package:the_menu/components/buttons/favorite_float_button.dart';
 import 'package:the_menu/models/cart.dart';
 
 import '../models/meal.dart';
 
 class MealDetailsPage extends StatefulWidget {
-  const MealDetailsPage({super.key});
+  const MealDetailsPage({required this.onToggleFavorite, super.key});
+
+  final void Function(Meal) onToggleFavorite;
 
   @override
   State<MealDetailsPage> createState() => _MealDetailsPageState();
@@ -101,7 +102,14 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
           ),
         ),
       ),
-      floatingActionButton: const FavoriteFloatButton(),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: colorScheme.onPrimaryContainer,
+        onPressed: () => widget.onToggleFavorite(meal),
+        child: Icon(
+          Icons.star_outline_outlined,
+          color: colorScheme.onInverseSurface,
+        ),
+      ),
       bottomNavigationBar: Container(
         height: 75,
         color: colorScheme.secondaryContainer,

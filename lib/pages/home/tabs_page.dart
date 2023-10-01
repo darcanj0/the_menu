@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
 import 'package:the_menu/components/app_bars/the_menu_drawer.dart';
+import 'package:the_menu/models/meal.dart';
 import 'package:the_menu/pages/home/categories_tab.dart';
 import 'package:the_menu/pages/home/favorites_tab.dart';
 
 import '../../components/buttons/cart_float_button.dart';
 
 class TabsPage extends StatefulWidget {
-  const TabsPage({super.key});
+  const TabsPage({required this.favoriteMeals, super.key});
+
+  final List<Meal> favoriteMeals;
 
   @override
   State<TabsPage> createState() => _TabsPageState();
@@ -22,10 +25,19 @@ class _TabsPageState extends State<TabsPage> {
     });
   }
 
-  final List<Map<String, Object>> _tabs = [
-    {'tab': const CategoriesTab(), 'appBarTitle': 'Categories'},
-    {'tab': const FavoritesTab(), 'appBarTitle': 'Favorites'},
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _tabs = [
+      {'tab': const CategoriesTab(), 'appBarTitle': 'Categories'},
+      {
+        'tab': FavoritesTab(favoriteMeals: widget.favoriteMeals),
+        'appBarTitle': 'Favorites'
+      },
+    ];
+  }
+
+  late List<Map<String, Object>> _tabs;
 
   @override
   Widget build(BuildContext context) {
