@@ -1,16 +1,24 @@
-# the_menu
 
-A Flutter implementation of a restaurant menu app.
+# The Menu
 
-## Getting Started
+An app that can be easily adapted to work with several restaurants or be implemented in a single restaurant. Built for ordering meals.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## What I learned
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Navigator
+- Navigation between pages
+- Routes creation
+- Tabs navigation
+- Widgets lifecycle
+- App lifecycle
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Live demo
+
+https://the-menu-564bd.firebaseapp.com/#/
+
+
+## Autores
+
+- [@darcanj0](https://www.github.com/darcanj0)
