@@ -5,6 +5,7 @@ import 'package:the_menu/components/cards/meal_card.dart';
 import 'package:the_menu/components/helpers/meals_not_found.dart';
 import 'package:the_menu/models/category.dart';
 import 'package:the_menu/models/meal.dart';
+import 'package:the_menu/utils/universal_scroll.dart';
 
 class CategoryMealsPage extends StatelessWidget {
   const CategoryMealsPage({required this.filteredMeals, super.key});
@@ -33,10 +34,12 @@ class CategoryMealsPage extends StatelessWidget {
                 )
               : SizedBox(
                   width: constraints.maxWidth,
-                  child: ListView.builder(
-                      itemCount: categoryMeals.length,
-                      itemBuilder: (ctx, index) =>
-                          MealCard(meal: categoryMeals[index])),
+                  child: UniversalScroll(
+                    child: ListView.builder(
+                        itemCount: categoryMeals.length,
+                        itemBuilder: (ctx, index) =>
+                            MealCard(meal: categoryMeals[index])),
+                  ),
                 ),
         ),
       ),

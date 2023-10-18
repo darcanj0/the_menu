@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/cards/meal_card.dart';
 import 'package:the_menu/models/meal.dart';
+import 'package:the_menu/utils/universal_scroll.dart';
 
 class FavoritesTab extends StatelessWidget {
   const FavoritesTab({required this.favoriteMeals, super.key});
@@ -36,10 +37,12 @@ class FavoritesTab extends StatelessWidget {
                     const Text("You haven't favorited any meals yet!")
                   ],
                 )
-              : ListView.builder(
-                  itemCount: favoriteMeals.length,
-                  itemBuilder: (ctx, index) =>
-                      MealCard(meal: favoriteMeals[index])),
+              : UniversalScroll(
+                  child: ListView.builder(
+                      itemCount: favoriteMeals.length,
+                      itemBuilder: (ctx, index) =>
+                          MealCard(meal: favoriteMeals[index])),
+                ),
         ),
       ),
     );

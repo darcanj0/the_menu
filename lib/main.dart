@@ -126,6 +126,7 @@ class _MyAppState extends State<MyApp> {
     );
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'The Menu',
       theme: theMenuTheme,
       home: TabsPage(

@@ -4,6 +4,7 @@ import 'package:the_menu/components/buttons/checkout_float_button.dart';
 import 'package:the_menu/components/cards/cart_item_card.dart';
 import 'package:the_menu/components/helpers/empty_cart.dart';
 import 'package:the_menu/models/cart.dart';
+import 'package:the_menu/utils/universal_scroll.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage(
@@ -40,12 +41,14 @@ class CartPageState extends State<CartPage> {
                 )
               : SizedBox(
                   width: constraints.maxWidth,
-                  child: ListView.builder(
-                    itemCount: widget.cart.items.length,
-                    itemBuilder: (ctx, index) => CartItemCard(
-                      cartItem: widget.cart.items[index],
-                      onRemove: widget.onRemove,
-                      onChangeAmmount: widget.onChangeAmmount,
+                  child: UniversalScroll(
+                    child: ListView.builder(
+                      itemCount: widget.cart.items.length,
+                      itemBuilder: (ctx, index) => CartItemCard(
+                        cartItem: widget.cart.items[index],
+                        onRemove: widget.onRemove,
+                        onChangeAmmount: widget.onChangeAmmount,
+                      ),
                     ),
                   ),
                 ),

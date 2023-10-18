@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
 import 'package:the_menu/models/meal.dart';
+import 'package:the_menu/utils/universal_scroll.dart';
 
 import '../components/cards/meal_card.dart';
 import '../components/helpers/meals_not_found.dart';
@@ -25,10 +26,12 @@ class AllMealsPage extends StatelessWidget {
                 )
               : SizedBox(
                   width: constraints.maxWidth,
-                  child: ListView.builder(
-                      itemCount: filteredMeals.length,
-                      itemBuilder: (ctx, index) =>
-                          MealCard(meal: filteredMeals[index])),
+                  child: UniversalScroll(
+                    child: ListView.builder(
+                        itemCount: filteredMeals.length,
+                        itemBuilder: (ctx, index) =>
+                            MealCard(meal: filteredMeals[index])),
+                  ),
                 ),
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
 import 'package:the_menu/models/cart.dart';
 import 'package:the_menu/utils/routes.dart';
+import 'package:the_menu/utils/universal_scroll.dart';
 
 import '../models/meal.dart';
 
@@ -266,9 +267,11 @@ class MealDetails extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(color: colorScheme.outline, width: 3.5),
               ),
-              child: ListView(
-                shrinkWrap: true,
-                children: getMealBadges,
+              child: UniversalScroll(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: getMealBadges,
+                ),
               ),
             ),
           ),

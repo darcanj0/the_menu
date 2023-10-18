@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/cards/category_card.dart';
 import 'package:the_menu/models/dummy_data.dart';
+import 'package:the_menu/utils/universal_scroll.dart';
 
 class CategoriesTab extends StatelessWidget {
   static const _categories = categoriesMock;
@@ -14,11 +15,13 @@ class CategoriesTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-      child: GridView.count(
-        crossAxisCount: 2,
-        scrollDirection: Axis.horizontal,
-        childAspectRatio: 1 / .75,
-        children: _categoriesCards,
+      child: UniversalScroll(
+        child: GridView.count(
+          crossAxisCount: 2,
+          scrollDirection: Axis.horizontal,
+          childAspectRatio: 1 / .75,
+          children: _categoriesCards,
+        ),
       ),
     );
   }
