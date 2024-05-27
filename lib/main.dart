@@ -78,10 +78,10 @@ class _MyAppState extends State<MyApp> {
 
     return MultiProvider(
       providers: [
-        Provider(
+        ChangeNotifierProvider(
           create: (context) => MealStore(),
         ),
-        Provider(
+        ChangeNotifierProvider(
           create: (context) => CartStore(),
         )
       ],
