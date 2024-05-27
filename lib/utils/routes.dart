@@ -4,5 +4,6 @@ enum AppRoutes {
   categoryMeals,
   mealDetails,
   cart,
-  settings
+  settings,
+  auth,
 }

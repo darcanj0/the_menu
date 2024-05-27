@@ -18,7 +18,7 @@ class AllMealsPage extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final filteredMeals = context.watch<MealStore>().favoriteMeals;
+            final filteredMeals = context.watch<MealStore>().filteredMeals;
             return filteredMeals.isEmpty
                 ? Center(
                     child: MealsNotFound(
