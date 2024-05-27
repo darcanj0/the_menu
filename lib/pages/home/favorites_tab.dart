@@ -24,7 +24,7 @@ class FavoritesTab extends StatelessWidget {
                   children: [
                     Image(
                         fit: BoxFit.contain,
-                        width: constraints.maxWidth * 0.8,
+                        width: constraints.maxHeight * 0.6,
                         image: const AssetImage(
                             'assets/images/meals/not_found.png')),
                     const SizedBox(

@@ -36,7 +36,7 @@ class CartPageState extends State<CartPage> {
           builder: (context, constraints) => widget.cart.items.isEmpty
               ? Center(
                   child: EmptyCart(
-                    imageWidth: constraints.maxWidth * 0.8,
+                    imageWidth: constraints.maxHeight * 0.6,
                   ),
                 )
               : SizedBox(
