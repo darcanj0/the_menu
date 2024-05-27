@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:the_menu/models/cart.dart';
-import 'package:the_menu/models/dummy_data.dart';
-import 'package:the_menu/models/meal.dart';
-import 'package:the_menu/models/settings.dart';
+import 'package:provider/provider.dart';
 import 'package:the_menu/pages/all_meals_page.dart';
 import 'package:the_menu/pages/cart_page.dart';
-import 'package:the_menu/pages/home/categories_tab.dart';
 import 'package:the_menu/pages/category_meals_page.dart';
-import 'package:the_menu/pages/meal_details_page.dart';
+import 'package:the_menu/pages/home/categories_tab.dart';
 import 'package:the_menu/pages/home/tabs_page.dart';
+import 'package:the_menu/pages/meal_details_page.dart';
 import 'package:the_menu/pages/settings_page.dart';
+import 'package:the_menu/stores/cart.store.dart';
+import 'package:the_menu/stores/meal.store.dart';
 import 'package:the_menu/utils/routes.dart';
 
 void main() {
@@ -25,54 +24,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  //filters
-  static const List<Meal> allMeals = mockMeals;
-
-  List<Meal> avaliableMeals = [];
-
-  Settings settings = Settings(
-      isGlutenFree: false, isDairyFree: false, isVegan: false, isVeggie: false);
-
-  void onSettingsChanged(Settings newSettings) {
-    setState(() {
-      settings = newSettings;
-      avaliableMeals = filteredMeals;
-    });
-  }
-
-  List<Meal> get filteredMeals => allMeals.where((element) {
-        final filterVegan = settings.isVegan && !element.isVegan;
-        final filterVeggie = settings.isVeggie && !element.isVeggie;
-        final filterDairy = settings.isDairyFree && !element.isDairyFree;
-        final filterGluten = settings.isGlutenFree && !element.isGlutenFree;
-        return !filterGluten && !filterDairy && !filterVegan && !filterVeggie;
-      }).toList();
-
-  //favorites
-  List<Meal> favoriteMeals = [];
-
-  void toggleFavoriteMeal(Meal meal) {
-    setState(() {
-      favoriteMeals.contains(meal)
-          ? favoriteMeals.remove(meal)
-          : favoriteMeals.add(meal);
-    });
-  }
-
-  bool isFavorite(Meal meal) => favoriteMeals.contains(meal);
-
-  //cart
-  Cart cart = Cart(items: []);
-
-  void addToCart(CartItem item) => setState(() => cart.addItem(item));
-
-  void removeFromCart(CartItem item) => setState(() {
-        cart.removeItem(item);
-      });
-
-  void changeItemAmmount(CartItem item, int newAmmount) =>
-      setState(() => cart.changeAmmount(item, newAmmount));
-
   @override
   Widget build(BuildContext context) {
     final TextTheme originalTextTheme = Theme.of(context).textTheme;
@@ -125,37 +76,31 @@ class _MyAppState extends State<MyApp> {
       useMaterial3: true,
     );
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'The Menu',
-      theme: theMenuTheme,
-      home: TabsPage(
-        favoriteMeals: favoriteMeals,
+    return MultiProvider(
+      providers: [
+        Provider(
+          create: (context) => MealStore(),
+        ),
+        Provider(
+          create: (context) => CartStore(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'The Menu',
+        theme: theMenuTheme,
+        home: const TabsPage(),
+        routes: {
+          AppRoutes.categories.name: (_) => const TabsPage(),
+          AppRoutes.categoryMeals.name: (_) => const CategoryMealsPage(),
+          AppRoutes.cart.name: (_) => const CartPage(),
+          AppRoutes.mealDetails.name: (_) => const MealDetailsPage(),
+          AppRoutes.allMeals.name: (_) => const AllMealsPage(),
+          AppRoutes.settings.name: (_) => const SettingsPage()
+        },
+        onUnknownRoute: (settings) =>
+            MaterialPageRoute(builder: (_) => const CategoriesTab()),
       ),
-      routes: {
-        AppRoutes.categories.name: (_) =>
-            TabsPage(favoriteMeals: favoriteMeals),
-        AppRoutes.categoryMeals.name: (_) =>
-            CategoryMealsPage(filteredMeals: filteredMeals),
-        AppRoutes.cart.name: (_) => CartPage(
-              cart: cart,
-              onRemove: removeFromCart,
-              onChangeAmmount: changeItemAmmount,
-            ),
-        AppRoutes.mealDetails.name: (_) => MealDetailsPage(
-              onToggleFavorite: toggleFavoriteMeal,
-              isFavorite: isFavorite,
-              onAddToCart: addToCart,
-            ),
-        AppRoutes.allMeals.name: (_) =>
-            AllMealsPage(filteredMeals: filteredMeals),
-        AppRoutes.settings.name: (_) => SettingsPage(
-              settings: settings,
-              onSettingsChanged: onSettingsChanged,
-            )
-      },
-      onUnknownRoute: (settings) =>
-          MaterialPageRoute(builder: (_) => const CategoriesTab()),
     );
   }
 }
