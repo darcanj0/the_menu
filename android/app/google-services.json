@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "381214135748",
+    "project_id": "the-menu-ceub",
+    "storage_bucket": "the-menu-ceub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:381214135748:android:23f6508604bbfa86de8091",
+        "android_client_info": {
+          "package_name": "com.example.the_menu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn-pUnPAp6jKRJsrG2pztvkujOBLlsaBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

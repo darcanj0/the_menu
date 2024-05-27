@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:the_menu/firebase_options.dart';
 import 'package:the_menu/pages/all_meals_page.dart';
 import 'package:the_menu/pages/cart_page.dart';
 import 'package:the_menu/pages/category_meals_page.dart';
@@ -12,7 +14,8 @@ import 'package:the_menu/stores/cart.store.dart';
 import 'package:the_menu/stores/meal.store.dart';
 import 'package:the_menu/utils/routes.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
