@@ -8,6 +8,9 @@ abstract class IAuthService {
   Future<void> signup(AuthDto dto);
   Future<void> login(AuthDto dto);
   Future<void> logout();
+  Future<void> logCreatedUser(AuthDto dto);
 
   factory IAuthService() => AuthFirebaseService();
 }
+
+enum SignupMethods { emailPassword, google }
