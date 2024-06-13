@@ -1,3 +1,5 @@
+import 'package:the_menu/models/recipe.dart';
+
 class Meal {
   final String id;
   final String name;
@@ -11,19 +13,20 @@ class Meal {
   final bool isDairyFree;
   final bool isVeggie;
   final bool isVegan;
+  final Recipe recipe;
 
-  const Meal({
-    required this.id,
-    required this.name,
-    required this.price,
-    required this.imagePath,
-    required this.description,
-    required this.durationInMinutes,
-    required this.categoriesIds,
-    required this.isDairyFree,
-    required this.isGlutenFree,
-    required this.isVegan,
-    required this.isVeggie,
-    required this.servesHowManyPeople,
-  });
+  const Meal(
+      {required this.id,
+      required this.name,
+      required this.price,
+      required this.imagePath,
+      required this.description,
+      required this.durationInMinutes,
+      required this.categoriesIds,
+      required this.isDairyFree,
+      required this.isGlutenFree,
+      required this.isVegan,
+      required this.isVeggie,
+      required this.servesHowManyPeople,
+      required this.recipe});
 }
