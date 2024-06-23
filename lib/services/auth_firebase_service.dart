@@ -27,10 +27,8 @@ class AuthFirebaseService implements IAuthService {
   Future<void> signup(AuthDto dto) async {
     final user = await _firebaseAuth.createUserWithEmailAndPassword(
         email: dto.email, password: dto.password);
-    await Future.wait([
-      user.user?.updateDisplayName(dto.name) ?? Future.sync(() => null),
-      logCreatedUser(dto)
-    ]);
+    await user.user?.updateDisplayName(dto.name);
+    await logCreatedUser(dto);
   }
 
   static MultiStreamController<MenuUser?>? _controller;
@@ -46,7 +44,7 @@ class AuthFirebaseService implements IAuthService {
   static MenuUser? _getUserFromFirebase(User? firebaseUser) {
     if (firebaseUser == null) return null;
     final email = firebaseUser.email!;
-    final name = firebaseUser.displayName!;
+    final name = firebaseUser.displayName;
     final uid = firebaseUser.uid;
 
     return MenuUser(name: name, uid: uid, email: email);
