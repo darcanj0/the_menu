@@ -102,7 +102,23 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
               MealDetails(
                 getMealBadges: getMealBadges,
                 colorScheme: colorScheme,
-              )
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Cook your meal at home!',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MealRecipe(meal: meal)
             ],
           ),
         ),
@@ -241,6 +257,45 @@ class MealInfo extends StatelessWidget {
             style: textTheme.labelLarge,
           )
         ],
+      ),
+    );
+  }
+}
+
+class MealRecipe extends StatelessWidget {
+  const MealRecipe({super.key, required this.meal});
+
+  final Meal meal;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return SizedBox(
+      width: double.infinity,
+      child: Center(
+        child: LayoutBuilder(
+          builder: (ctx, constraints) => ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            child: Container(
+              height: 150,
+              width: constraints.maxWidth * 0.8,
+              decoration: BoxDecoration(
+                border: Border.all(color: colorScheme.outline, width: 3.5),
+              ),
+              child: UniversalScroll(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: meal.recipe.steps
+                      .map((step) => ListTile(
+                            title: Text(step.toString()),
+                          ))
+                      .toList(),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
