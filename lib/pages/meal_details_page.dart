@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
 import 'package:the_menu/models/cart.dart';
+import 'package:the_menu/stores/cart.store.dart';
+import 'package:the_menu/stores/meal.store.dart';
 import 'package:the_menu/utils/routes.dart';
 import 'package:the_menu/utils/universal_scroll.dart';
 
 import '../models/meal.dart';
 
 class MealDetailsPage extends StatefulWidget {
-  const MealDetailsPage(
-      {required this.onToggleFavorite,
-      required this.isFavorite,
-      required this.onAddToCart,
-      super.key});
-
-  final void Function(Meal) onToggleFavorite;
-
-  final bool Function(Meal) isFavorite;
-
-  final void Function(CartItem) onAddToCart;
+  const MealDetailsPage({super.key});
 
   @override
   State<MealDetailsPage> createState() => _MealDetailsPageState();
@@ -47,12 +40,13 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final ColorScheme colorScheme = theme.colorScheme;
+    final cartStore = context.read<CartStore>();
 
     final Meal meal = ModalRoute.of(context)!.settings.arguments as Meal;
 
     void addToCart() {
       final CartItem item = CartItem(meal: meal, ammount: ammount);
-      widget.onAddToCart(item);
+      cartStore.addToCart(item);
       Navigator.of(context).pushNamed(AppRoutes.cart.name);
     }
 
@@ -108,19 +102,41 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
               MealDetails(
                 getMealBadges: getMealBadges,
                 colorScheme: colorScheme,
-              )
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Cook your meal at home!',
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MealRecipe(meal: meal)
             ],
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: colorScheme.onPrimaryContainer,
-        onPressed: () => widget.onToggleFavorite(meal),
-        child: Icon(
-          widget.isFavorite(meal) ? Icons.star : Icons.star_outline_outlined,
-          color: colorScheme.onInverseSurface,
-        ),
-      ),
+      floatingActionButton: Builder(builder: (context) {
+        final mealStore = context.watch<MealStore>();
+
+        return FloatingActionButton(
+          backgroundColor: colorScheme.onPrimaryContainer,
+          onPressed: () => mealStore.toggleFavoriteMeal(meal),
+          child: Icon(
+            mealStore.isFavorite(meal)
+                ? Icons.star
+                : Icons.star_outline_outlined,
+            color: colorScheme.onInverseSurface,
+          ),
+        );
+      }),
       bottomNavigationBar: Container(
         height: 75,
         color: colorScheme.secondaryContainer,
@@ -241,6 +257,45 @@ class MealInfo extends StatelessWidget {
             style: textTheme.labelLarge,
           )
         ],
+      ),
+    );
+  }
+}
+
+class MealRecipe extends StatelessWidget {
+  const MealRecipe({super.key, required this.meal});
+
+  final Meal meal;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return SizedBox(
+      width: double.infinity,
+      child: Center(
+        child: LayoutBuilder(
+          builder: (ctx, constraints) => ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+            child: Container(
+              height: 150,
+              width: constraints.maxWidth * 0.8,
+              decoration: BoxDecoration(
+                border: Border.all(color: colorScheme.outline, width: 3.5),
+              ),
+              child: UniversalScroll(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: meal.recipe.steps
+                      .map((step) => ListTile(
+                            title: Text(step.toString()),
+                          ))
+                      .toList(),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

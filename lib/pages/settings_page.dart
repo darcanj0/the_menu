@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
-import 'package:the_menu/models/settings.dart';
+import 'package:the_menu/stores/meal.store.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage(
-      {required this.onSettingsChanged, required this.settings, super.key});
+  const SettingsPage({super.key});
 
   static const double sectionPaddingInPx = 20;
-
-  final void Function(Settings) onSettingsChanged;
-
-  final Settings settings;
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -35,12 +31,12 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         subtitle: Text(subtitle),
         value: value,
-        onChanged: (value) {
-          onChanged(value);
-          widget.onSettingsChanged(widget.settings);
-        },
+        onChanged: onChanged,
       );
     }
+
+    final mealStore = context.watch<MealStore>();
+    final currentFilter = mealStore.mealFilters;
 
     return Scaffold(
       appBar: const TheMenuAppBar(title: 'Settings'),
@@ -68,39 +64,36 @@ class _SettingsPageState extends State<SettingsPage> {
               createSwitch(
                 title: 'Gluten Free',
                 subtitle: 'Only display Gluten Free meals',
-                value: widget.settings.isGlutenFree,
+                value: currentFilter.isGlutenFree,
                 onChanged: (value) {
-                  setState(() {
-                    widget.settings.isGlutenFree = value;
-                  });
+                  final newFilter = currentFilter.copyWith(isGlutenFree: value);
+                  mealStore.onFilterChanged(newFilter);
                 },
               ),
               createSwitch(
                   title: 'Lactose Free',
                   subtitle: 'Only display Lactose Free meals',
-                  value: widget.settings.isDairyFree,
+                  value: currentFilter.isDairyFree,
                   onChanged: (value) {
-                    setState(() {
-                      widget.settings.isDairyFree = value;
-                    });
+                    final newFilter =
+                        currentFilter.copyWith(isDairyFree: value);
+                    mealStore.onFilterChanged(newFilter);
                   }),
               createSwitch(
                   title: 'Vegan',
                   subtitle: 'Only display vegan meals',
-                  value: widget.settings.isVegan,
+                  value: currentFilter.isVegan,
                   onChanged: (value) {
-                    setState(() {
-                      widget.settings.isVegan = value;
-                    });
+                    final newFilter = currentFilter.copyWith(isVegan: value);
+                    mealStore.onFilterChanged(newFilter);
                   }),
               createSwitch(
                 title: 'Vegetarian',
                 subtitle: 'Only display veggie meals',
-                value: widget.settings.isVeggie,
+                value: currentFilter.isVeggie,
                 onChanged: (value) {
-                  setState(() {
-                    widget.settings.isVeggie = value;
-                  });
+                  final newFilter = currentFilter.copyWith(isVeggie: value);
+                  mealStore.onFilterChanged(newFilter);
                 },
               )
             ],

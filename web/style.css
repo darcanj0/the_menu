@@ -3,8 +3,3 @@ body {
     align-items: center;
     justify-content: center;
 }
-
-#flutter_host {
-    width: 450px;
-    height: 900px;
-}

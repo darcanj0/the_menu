@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:the_menu/components/app_bars/the_menu_app_bar.dart';
 import 'package:the_menu/components/app_bars/the_menu_drawer.dart';
-import 'package:the_menu/models/meal.dart';
 import 'package:the_menu/pages/home/categories_tab.dart';
 import 'package:the_menu/pages/home/favorites_tab.dart';
 
 import '../../components/buttons/cart_float_button.dart';
 
 class TabsPage extends StatefulWidget {
-  const TabsPage({required this.favoriteMeals, super.key});
-
-  final List<Meal> favoriteMeals;
+  const TabsPage({super.key});
 
   @override
   State<TabsPage> createState() => _TabsPageState();
@@ -30,10 +27,7 @@ class _TabsPageState extends State<TabsPage> {
     super.initState();
     _tabs = [
       {'tab': const CategoriesTab(), 'appBarTitle': 'Categories'},
-      {
-        'tab': FavoritesTab(favoriteMeals: widget.favoriteMeals),
-        'appBarTitle': 'Favorites'
-      },
+      {'tab': const FavoritesTab(), 'appBarTitle': 'Favorites'},
     ];
   }
 

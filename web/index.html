@@ -52,8 +52,6 @@
         },
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine({
-              // Pass a reference to "div#flutter_host" into the Flutter engine.
-              hostElement: document.querySelector("#flutter_host")
             }).then(function(appRunner) {
             appRunner.runApp();
           });

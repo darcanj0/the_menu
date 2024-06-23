@@ -5,6 +5,8 @@ class Cart {
 
   Cart({required this.items});
 
+  factory Cart.empty() => Cart(items: List<CartItem>.empty(growable: true));
+
   double get total => items
       .map((item) => item.total)
       .fold(0, (previousValue, element) => previousValue + element);
